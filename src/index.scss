@@ -1,0 +1,81 @@
+:root {
+  --primary-color: #1677ff;
+  --green: rgb(68, 183, 0);
+  --orange: #eda20c;
+  --blue: #2b7bd6;
+  --red: #d9514c;
+  --transparent-gray-0: rgba(0, 0, 0, 0);
+  --transparent-gray-50: rgba(0, 0, 0, 0.02);
+  --transparent-gray-100: rgba(0, 0, 0, 0.06);
+  --transparent-gray-200: rgba(0, 0, 0, 0.08);
+  --transparent-gray-300: rgba(0, 0, 0, 0.1);
+  --transparent-gray-400: rgba(0, 0, 0, 0.12);
+  --transparent-gray-500: rgba(0, 0, 0, 0.16);
+  --transparent-gray-600: rgba(0, 0, 0, 0.22);
+  --transparent-gray-700: rgba(0, 0, 0, 0.36);
+  --transparent-gray-800: rgba(0, 0, 0, 0.58);
+  --transparent-gray-900: rgba(0, 0, 0, 0.88);
+  --transparent-gray-1000: rgb(0, 0, 0);
+  --gray-0: #ffffff;
+  --gray-50: #fafafa;
+  --gray-100: #f2f2f2;
+  --gray-200: #ebebeb;
+  --gray-300: #e6e6e6;
+  --gray-400: #e0e0e0;
+  --gray-500: #d6d6d6;
+  --gray-600: #c7c7c7;
+  --gray-700: #a3a3a3;
+  --gray-800: #6b6b6b;
+  --gray-900: #1f1f1f;
+  --gray-1000: #000000;
+}
+
+* {
+  font-family: initial;
+}
+
+body {
+  margin: 0;
+  font-family:
+    'PingFang SC',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Ubuntu,
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    'Hiragino Sans GB',
+    'Microsoft YaHei UI',
+    'Microsoft YaHei',
+    'Source Han Sans CN',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#body {
+  .ant-modal-root .ant-modal-wrap {
+    z-index: 2000;
+  }
+  .ant-modal-root .ant-modal-mask {
+    z-index: 2000;
+  }
+
+  .infinite-scroll-component__outerdiv {
+    flex: 1;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

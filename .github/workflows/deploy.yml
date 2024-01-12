@@ -1,0 +1,36 @@
+name: Deploy to Remote Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.15.0
+
+      - name: Install dependencies and build
+        run: |
+          npm ci
+          npm run build --if-present
+          mv build docs
+
+      - name: Deploy to remote server
+        uses: easingthemes/ssh-deploy@v2.1.5
+        with:
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: '-avz --delete'
+          SOURCE: 'docs/'
