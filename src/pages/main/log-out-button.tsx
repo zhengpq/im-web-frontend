@@ -26,10 +26,9 @@ const SignOutButton: React.FC = () => {
       url: '/auth/logout',
     });
     if (data !== null && !data.access_token) {
-      // dispatch(initProfile(initialProfileState.value));
       initState();
       setIsModalVisible(false);
-      navigate('/');
+      navigate('/sign-in');
     }
   };
   return (

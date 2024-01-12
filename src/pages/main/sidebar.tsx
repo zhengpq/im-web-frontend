@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button, Divider } from 'antd';
 import { useSelector } from 'react-redux';
 import User from '@/components/user';
-import SignOutButton from './sign-out-button';
+import LogOutButton from './log-out-button';
 import { MENUS } from '@/const/menus';
 import { RootState } from '@/redux/store';
 import { FriendRequestStatus } from '@/types/friend';
@@ -90,7 +90,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
           })}
         </div>
       </div>
-      <SignOutButton></SignOutButton>
+      <LogOutButton></LogOutButton>
     </div>
   );
 };
