@@ -65,7 +65,7 @@ const socket = io(`${DOMAIN}`, {
   autoConnect: false,
   reconnection: true,
   reconnectionDelay: 10000,
-  reconnectionAttempts: 20,
+  reconnectionAttempts: Infinity,
 });
 
 socket.on(SOCKET_EVENT_CONNECT, () => {

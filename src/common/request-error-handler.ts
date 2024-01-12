@@ -13,9 +13,14 @@ const authError = () => {
     window.location.pathname === '/'
   )
     return;
-  message.info('登录态已失效，请重新登陆', () => {
-    browserRouter.navigate('/sign-in');
-  });
+  message
+    .info({
+      content: '登录态已失效，请重新登陆',
+      duration: 1,
+    })
+    .then(() => {
+      browserRouter.navigate('/sign-in');
+    });
 };
 
 // 1000

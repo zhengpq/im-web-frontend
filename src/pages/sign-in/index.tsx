@@ -68,7 +68,7 @@ const SignIn: React.FC = () => {
                 <Checkbox>记住我</Checkbox>
               </Form.Item> */}
 
-              <Link to="/sign-up">没有账户？去注册一个！</Link>
+              <Link to="/sign-up">没有账户，去注册一个！</Link>
             </div>
           </Form.Item>
           <Form.Item>

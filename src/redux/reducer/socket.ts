@@ -8,7 +8,7 @@ interface SocketState {
 
 export const initialSocketState: SocketState = {
   value: {
-    connecting: false,
+    connecting: true,
   },
 };
 

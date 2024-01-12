@@ -84,7 +84,7 @@ const SignUp: React.FC = () => {
         </Form.Item>
         <Form.Item>
           <div className="flex items-center justify-between text-xs">
-            <Link to="/sign-in">已经有账户了？直接去登录</Link>
+            <Link to="/sign-in">已经有账户了，直接去登录</Link>
           </div>
         </Form.Item>
         <Form.Item>

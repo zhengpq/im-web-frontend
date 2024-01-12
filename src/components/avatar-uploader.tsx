@@ -4,7 +4,13 @@ import { PlusOutlined } from '@ant-design/icons';
 import React from 'react';
 import { type RcFile, type UploadChangeParam, type UploadFile } from 'antd/es/upload';
 import { UserFieldType } from '@/types/sign-up';
-import { avatarMaxSize, avatarRatio, avatarRules, checkoutImage } from '@/rules/avatar-rules';
+import {
+  avatarMaxSize,
+  avatarRatio,
+  avatarRules,
+  avatarTypes,
+  checkoutImage,
+} from '@/rules/avatar-rules';
 import { BASE_URL } from '@/const/api';
 
 interface IAvatarProps {
@@ -45,7 +51,6 @@ const AvatarUploader: React.FC<IAvatarProps> = ({ form, className }) => {
     const image = await loadImage(file);
     const { width, height } = image;
     if (size > avatarMaxSize) {
-      await message.error('头像图片大小不能超过 1M');
       result = false;
     }
     if (Math.abs(width / height - avatarRatio) < 0.001) {
@@ -72,6 +77,7 @@ const AvatarUploader: React.FC<IAvatarProps> = ({ form, className }) => {
       >
         <Upload
           name="image"
+          accept={avatarTypes.join(',')}
           listType="picture-card"
           showUploadList={false}
           beforeUpload={async (file) => {

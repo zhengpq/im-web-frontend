@@ -12,7 +12,7 @@ export const usernameRules: Rule[] = [
   {
     type: 'string',
     pattern: /^[\w\u4e00-\u9fa5]{4,16}$/,
-    message: '用户名包含字母、数字、下划线和中文字符，长度为4-16个字符',
+    message: '用户名仅支持包含字母、数字、下划线，长度为4-16个字符',
   },
   () => ({
     validator: debounce(async (_: RuleObject, value: any) => {

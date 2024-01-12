@@ -5,7 +5,7 @@ import { User } from '@/types/user';
 import { getIndexdb } from '@/common/indexdb';
 import request from '@/common/request';
 
-const useGetUserAvatar = (id: string, avatar?: string, username?: string) => {
+const useGetUserData = (id: string, avatar?: string, username?: string) => {
   const { currentChat } = useSelector((state: RootState) => state.chatPanel.value);
   const [userData, setUserData] = useState({
     avatar,
@@ -43,7 +43,7 @@ const useGetUserAvatar = (id: string, avatar?: string, username?: string) => {
     if (localData) {
       setUserData({
         avatar: localData.avatar,
-        username: localData.avatar,
+        username: localData.username,
       });
       return;
     }
@@ -51,7 +51,7 @@ const useGetUserAvatar = (id: string, avatar?: string, username?: string) => {
     if (remoteData) {
       setUserData({
         avatar: remoteData.avatar,
-        username: remoteData.avatar,
+        username: remoteData.username,
       });
     }
   };
@@ -63,4 +63,4 @@ const useGetUserAvatar = (id: string, avatar?: string, username?: string) => {
   return userData;
 };
 
-export default useGetUserAvatar;
+export default useGetUserData;

@@ -1,32 +1,50 @@
 import { message } from 'antd';
 import { Rule } from 'antd/es/form';
 
-const avatarTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
+export const avatarTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
 
 export const avatarMaxSize = 1024 * 1024;
 
 export const avatarRatio = 1 / 1;
 
+const typeMessage = '请选择图片文件';
+const imageTypeMessage = '只支持 jpg、jpeg、png 和 webp 格式的图片';
+const imageSizeMessage = '图片大小不能超过 1M';
+
 export const checkoutImage = async (file: File) => {
+  if (!file) {
+    return Promise.reject();
+  }
   if (typeof file === 'string' && file !== '') {
     await Promise.resolve();
     return;
   }
-  const messages = [];
+  const errorMessages = [];
   // 检查是否是图片文件
   if (!file.type.startsWith('image/')) {
-    messages.push('请选择图片文件');
+    await message.info({
+      content: typeMessage,
+      duration: 1,
+    });
+    errorMessages.push(typeMessage);
   }
   // 图片格式只支持 jpg|jpeg|png
   if (!avatarTypes.includes(file.type)) {
-    messages.push('只支持 jpg、jpeg 和 png 格式的图片');
+    await message.error({
+      content: imageTypeMessage,
+      duration: 1,
+    });
+    errorMessages.push(imageTypeMessage);
   }
   // 图片大小检查
   if (file.size > avatarMaxSize) {
-    await message.error('图片大小不能超过 1M');
-    messages.push('图片大小不能超过 1M');
+    await message.error({
+      content: imageSizeMessage,
+      duration: 1,
+    });
+    errorMessages.push(imageSizeMessage);
   }
-  if (messages.length > 0) return Promise.reject(messages.join(';'));
+  if (errorMessages.length > 0) return Promise.reject(errorMessages.join(';'));
   await Promise.resolve();
 };
 

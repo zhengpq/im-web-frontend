@@ -2,7 +2,7 @@ import React from 'react';
 import { MessageAvatarPoi } from '@/types';
 import { IndexdbGroupMessagesRow } from '@/types/indexdb';
 import Message from '@/components/message';
-import useGetUserAvatar from '@/hooks/use-get-user-avatar';
+import useGetUserData from '@/hooks/use-get-user-avatar';
 
 interface GroupMessageProps {
   username?: string;
@@ -19,7 +19,7 @@ const GroupMessage: React.FC<GroupMessageProps> = ({
   avatarPoi,
   message,
 }) => {
-  const { avatar: newAvatar, username: newUsername } = useGetUserAvatar(message.sender_id, avatar);
+  const { avatar: newAvatar, username: newUsername } = useGetUserData(message.sender_id, avatar);
   return (
     <Message
       className={className}
