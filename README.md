@@ -24,7 +24,7 @@ npm install
 SECRET_ID=your-cos-secret-id SECRET_KEY=your-cos-secret-key COS_BUCKET=your-cos-bucket COS_REGION=your-cos-region npm run start:dev
 ```
 
-## 3 功能
+## 4 功能
 - 注册用户
 - 用户信息修改（头像、用户名）
 - 添加、删除好友
@@ -37,9 +37,9 @@ SECRET_ID=your-cos-secret-id SECRET_KEY=your-cos-secret-key COS_BUCKET=your-cos-
 - 消息列表：滚动翻页加载旧消息
 - 消息状态：成功（默认）、失败、重发
 
-## 4 技术栈
+## 5 技术栈
 
-### 4.1 前端
+### 5.1 前端
 
 - 框架：React 全家桶
 - socket：socket.io
@@ -51,7 +51,7 @@ SECRET_ID=your-cos-secret-id SECRET_KEY=your-cos-secret-key COS_BUCKET=your-cos-
 - emoji：emoji-mart
 - 翻页加载：react-infinite-scroll-component
 
-### 4.2 后端
+### 5.2 后端
 项目地址：[https://github.com/zhengpq/im-web-backend](https://github.com/zhengpq/im-web-backend)
 
 - 框架：Nestjs
@@ -62,14 +62,14 @@ SECRET_ID=your-cos-secret-id SECRET_KEY=your-cos-secret-key COS_BUCKET=your-cos-
 - 加密：bcrypt
 - 图片存储：腾讯云 cos
 
-### 4.3 部署
+### 5.3 部署
 - 机器：腾讯云轻量服务器
 - web 服务器：NGINX
 - 构建：github action
 - 后端服务：docker
 - 后端服务管理：PM2
 
-## 5 数据库表结构
+## 6 数据库表结构
 
 ![database](https://im-web-1323590293.cos.ap-guangzhou.myqcloud.com/database.jpg)
 
