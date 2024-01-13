@@ -23,6 +23,7 @@ jobs:
           npm install
           npm run build --if-present
           ls
+          pwd
       - name: List directory contents
         run: ls -la
       - name: Deploy to remote server
