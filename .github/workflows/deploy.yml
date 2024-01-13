@@ -32,6 +32,7 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           password: ${{ secrets.REMOTE_PASSWORD }}
           script: |
+            ls
             rm -rf ${{ secrets.REMOTE_PATH }}/docs
             mkdir -p ${{ secrets.REMOTE_PATH }}/docs
-            cp -r ${{ github.workspace }}/docs/* ${{ secrets.REMOTE_PATH }}/docs/
+            cp -r ./docs/* ${{ secrets.REMOTE_PATH }}/docs/
