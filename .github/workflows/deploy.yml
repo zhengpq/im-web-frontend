@@ -30,7 +30,7 @@ jobs:
 
       - name: Deploy to remote server
         run: |
-          sshpass -p ${{ secrets.REMOTE_PASSWORD }} scp -r docs ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_PATH }}
+          sshpass -p ${{ secrets.REMOTE_PASSWORD }} scp -o StrictHostKeyChecking=no -r docs ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_PATH }}
         # env:
         #   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         #   REMOTE_USER: ${{ secrets.REMOTE_USER }}
