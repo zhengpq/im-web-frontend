@@ -1,0 +1,38 @@
+name: Deploy to Remote Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.15.0
+
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build --if-present
+          ls
+          pwd
+
+      - name: Install sshpass
+        run: sudo apt-get install sshpass
+
+      - name: Deploy to remote server
+        run: |
+          sshpass -p ${{ secrets.REMOTE_PASSWORD }} scp -o StrictHostKeyChecking=no -r docs ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_PATH }}
+        # env:
+        #   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        #   REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        #   REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
+        #   REMOTE_PATH: ${{ secrets.REMOTE_PATH }}

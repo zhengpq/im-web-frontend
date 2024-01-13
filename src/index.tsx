@@ -1,19 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './index.scss';
+import { Provider } from 'react-redux';
+import { StyleProvider } from '@ant-design/cssinjs';
+import { SWRConfig } from 'swr';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/locale/zh_CN';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import ErrorBoundary from './components/error-boundary';
+import { store } from './redux/store';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <SWRConfig
+      value={{
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+      }}
+    >
+      <Provider store={store}>
+        <StyleProvider hashPriority="high">
+          <ConfigProvider locale={zhCN}>
+            <App />
+          </ConfigProvider>
+        </StyleProvider>
+      </Provider>
+    </SWRConfig>
+  </React.StrictMode>,
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
