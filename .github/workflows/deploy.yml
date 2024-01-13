@@ -20,17 +20,16 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          npm ci
+          npm install
           npm run build --if-present
-          mv build docs
 
       - name: Deploy to remote server
-        uses: easingthemes/ssh-deploy@v2.1.5
+        uses: appleboy/ssh-action@master
         with:
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
-          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: '-avz --delete'
-          SOURCE: 'docs/'
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          script: |
+            rm -rf ${{ secrets.REMOTE_PATH }}/docs
+            mkdir -p ${{ secrets.REMOTE_PATH }}/docs
+            cp -r ${{ github.workspace }}/docs/* ${{ secrets.REMOTE_PATH }}/docs/
