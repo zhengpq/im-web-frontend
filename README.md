@@ -1,46 +1,82 @@
-# Getting Started with Create React App
+# 简易的Web 端聊天室
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1 项目介绍
+这是一个具备基础聊天室功能的项目，做这个项目的初衷是出于自己的兴趣，一直想自己开发一个具有前后端功能的项目，同时自己也可从中学习一些知识点，拓宽自己的技术视野，整体来说收获还是很多，比如在部署的时候就踩了很多坑。如果你也对自己开发前后端项目感兴趣，不妨看看，一起交流！
 
-## Available Scripts
+## 2 体验地址
 
-In the project directory, you can run:
+[web 聊天室](https://zhengpq.com/)
 
-### `npm start`
+**注意事项：体验的时候请不要使用平时常用密码，虽然前后端都做了密码加密，但是不敢保证不会被攻击**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 3 本地开发
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**前端**
+```
+npm install
+npm run start
+```
 
-### `npm test`
+**后端**
+先准备好数据库和腾讯云cos服务（应用中用了腾讯云的 cos 服务用于存储图片，也可以自己修改代码，使用磁盘存储），然后运行下方命令
+```
+npm install
+SECRET_ID=your-cos-secret-id SECRET_KEY=your-cos-secret-key COS_BUCKET=your-cos-bucket COS_REGION=your-cos-region npm run start:dev
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 3 功能
+- 注册用户
+- 用户信息修改（头像、用户名）
+- 添加、删除好友
+- 用户搜索
+- 私聊
+- 群聊
+- 群功能：添加成员、移除成员、退出群聊、解散群聊、清空群聊消息
+- 消息提醒：好友申请、群聊和私聊未读信息提示
+- 消息类型：单行/多行文本消息，表情包、图片
+- 消息列表：滚动翻页加载旧消息
+- 消息状态：成功（默认）、失败、重发
 
-### `npm run build`
+## 4 技术栈
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 4.1 前端
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 框架：React 全家桶
+- socket：socket.io
+- 组件库：ant-design
+- css：tailwindcss
+- 本地存储：dexie(indexdb 库)
+- icon 库：phosphor-react
+- 加密：crypto
+- emoji：emoji-mart
+- 翻页加载：react-infinite-scroll-component
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 4.2 后端
+项目地址：[https://github.com/zhengpq/im-web-backend](https://github.com/zhengpq/im-web-backend)
 
-### `npm run eject`
+- 框架：Nestjs
+- 数据库： MySQL
+- 数据库处理：sequelize
+- socket：socket.io
+- 登录态：jwt
+- 加密：bcrypt
+- 图片存储：腾讯云 cos
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 4.3 部署
+- 机器：腾讯云轻量服务器
+- web 服务器：NGINX
+- 构建：github action
+- 后端服务：docker
+- 后端服务管理：PM2
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 5 数据库表结构
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![database](https://im-web-1323590293.cos.ap-guangzhou.myqcloud.com/database.jpg)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 7 Todo
+- [ ] 首页设计优化
+- [ ] 发送图片支持使用粘贴板数据
+- [ ] 聊天记录搜索
+- [ ] 用户修改密码
+- [ ] 用户广场，新用户可通过用户广场添加好友

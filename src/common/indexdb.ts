@@ -1,5 +1,4 @@
 import Dexie, { Table } from 'dexie';
-import 'dexie-observable';
 import {
   IndexdbChatsRow,
   IndexdbFriendMessagesRow,
