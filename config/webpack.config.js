@@ -235,10 +235,13 @@ module.exports = function (webpackEnv) {
     },
     optimization: {
       minimize: isEnvProduction,
-      splitChunks: {
-        chunks: 'all', // 这将选择哪些代码块用于拆分（其他选项：'async', 'initial', 函数）
-        maxSize: 1200000, // 生成块的最大大小（以字节为单位）
-      },
+      splitChunks:
+        process.env.NODE_ENV === 'development'
+          ? false
+          : {
+              chunks: 'all', // 这将选择哪些代码块用于拆分（其他选项：'async', 'initial', 函数）
+              maxSize: 1200000, // 生成块的最大大小（以字节为单位）
+            },
       minimizer: [
         // This is only used in production mode
         new TerserPlugin({
