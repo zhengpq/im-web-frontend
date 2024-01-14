@@ -1,6 +1,7 @@
 # 简易的Web 端聊天室
 
 ## 1 项目介绍
+
 这是一个具备基础聊天室功能的项目，做这个项目的初衷是出于自己的兴趣，一直想自己开发一个具有前后端功能的项目，同时自己也可从中学习一些知识点，拓宽自己的技术视野，整体来说收获还是很多，比如在部署的时候就踩了很多坑。如果你也对自己开发前后端项目感兴趣，不妨看看，一起交流！
 
 ## 2 体验地址
@@ -9,9 +10,24 @@
 
 **注意事项：体验的时候请不要使用平时常用密码，虽然前后端都做了密码加密，但是不敢保证不会被攻击**
 
+### 使用
+
+首页注册和登录
+
+![首页](https://im-web-1323590293.cos.ap-guangzhou.myqcloud.com/%E9%A6%96%E9%A1%B5.jpg)
+
+注册完账号之后通过搜索用户添加好友
+
+![搜索用户](https://im-web-1323590293.cos.ap-guangzhou.myqcloud.com/%E6%90%9C%E7%B4%A2%E7%94%A8%E6%88%B7.jpg)
+
+通过按钮创建群聊
+
+![创建群聊](https://im-web-1323590293.cos.ap-guangzhou.myqcloud.com/%E5%88%9B%E5%BB%BA%E7%BE%A4%E8%81%8A.jpg)
+
 ## 3 本地开发
 
 **前端**
+
 ```
 npm install
 npm run start
@@ -19,12 +35,14 @@ npm run start
 
 **后端**
 先准备好数据库和腾讯云cos服务（应用中用了腾讯云的 cos 服务用于存储图片，也可以自己修改代码，使用磁盘存储），然后运行下方命令
+
 ```
 npm install
 SECRET_ID=your-cos-secret-id SECRET_KEY=your-cos-secret-key COS_BUCKET=your-cos-bucket COS_REGION=your-cos-region npm run start:dev
 ```
 
 ## 4 功能
+
 - 注册用户
 - 用户信息修改（头像、用户名）
 - 添加、删除好友
@@ -52,6 +70,7 @@ SECRET_ID=your-cos-secret-id SECRET_KEY=your-cos-secret-key COS_BUCKET=your-cos-
 - 翻页加载：react-infinite-scroll-component
 
 ### 5.2 后端
+
 项目地址：[https://github.com/zhengpq/im-web-backend](https://github.com/zhengpq/im-web-backend)
 
 - 框架：Nestjs
@@ -63,6 +82,7 @@ SECRET_ID=your-cos-secret-id SECRET_KEY=your-cos-secret-key COS_BUCKET=your-cos-
 - 图片存储：腾讯云 cos
 
 ### 5.3 部署
+
 - 机器：腾讯云轻量服务器
 - web 服务器：NGINX
 - 构建：github action
@@ -73,8 +93,8 @@ SECRET_ID=your-cos-secret-id SECRET_KEY=your-cos-secret-key COS_BUCKET=your-cos-
 
 ![database](https://im-web-1323590293.cos.ap-guangzhou.myqcloud.com/database.jpg)
 
-
 ## 7 Todo
+
 - [ ] 首页设计优化
 - [ ] 发送图片支持使用粘贴板数据
 - [ ] 聊天记录搜索
