@@ -1,41 +1,56 @@
 import React from 'react';
-import { Button } from 'antd';
 import { Link } from 'react-router-dom';
-import Background from '../../images/home-page-bg.jpg';
-
-const commonStyle = {
-  transition: 'all .2s ease-in',
-};
 
 const Home: React.FC = () => {
   return (
     <div className="flex items-center justify-center w-screen h-screen">
-      <div className="absolute w-full h-full">
-        <img className="w-full h-full object-cover" src={Background} alt="" />
+      <div
+        className="absolute z-30"
+        style={{
+          width: '100vh',
+          height: '100vh',
+          left: '-50vh',
+          bottom: '-50vh',
+          transform: 'rotate(24deg)',
+        }}
+      >
+        <div
+          className="shape-rectangle"
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(255, 255, 255, 0.04)',
+            border: '2px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '180px',
+          }}
+        ></div>
       </div>
-      <div className="flex items-center relative z-10">
-        <Link to="/sign-up">
-          <div
-            className="w-240 relative h-48 text-white text-base font-semibold flex items-center justify-center rounded-8 mr-36 border-white overflow-hidden border-[1px] border-solid hover:border-2 hover:text-lg"
-            style={commonStyle}
-          >
-            <div
-              className="absolute w-full h-full bg-white opacity-0 hover:opacity-20"
-              style={commonStyle}
-            ></div>
-            <div>注册账户</div>
+      <div className="absolute z-30" style={{ width: '100vh', right: '-50vh', top: '-50vh' }}>
+        <svg
+          className="w-full shape-circle"
+          viewBox="0 0 600 600"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="300" cy="300" r="300" fill="white" fillOpacity="0.04" />
+          <circle cx="300" cy="300" r="299.5" stroke="white" strokeOpacity="0.1" />
+        </svg>
+      </div>
+      <div
+        className="absolute w-full h-full"
+        style={{ background: 'linear-gradient(45deg, #BE2D93, #4593E5)' }}
+      ></div>
+      <div className="flex items-center relative z-40">
+        <Link to="/sign-up" className="mr-36">
+          <div className="home-button">
+            <div className="home-button-bg"></div>
+            <div className="home-button-text">注册账户</div>
           </div>
         </Link>
         <Link to="/sign-in">
-          <div
-            className="w-240 h-48 relative text-white text-base font-semibold flex items-center justify-center rounded-8 border-white overflow-hidden border-[1px] border-solid hover:border-2 hover:text-lg"
-            style={commonStyle}
-          >
-            <div
-              className="absolute w-full h-full bg-white opacity-0 hover:opacity-20"
-              style={commonStyle}
-            ></div>
-            <div>登录账户</div>
+          <div className="home-button">
+            <div className="home-button-bg"></div>
+            <div className="home-button-text">登录账户</div>
           </div>
         </Link>
       </div>

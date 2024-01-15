@@ -95,7 +95,6 @@ SECRET_ID=your-cos-secret-id SECRET_KEY=your-cos-secret-key COS_BUCKET=your-cos-
 
 ## 7 Todo
 
-- [ ] 首页设计优化
 - [ ] 发送图片支持使用粘贴板数据
 - [ ] 聊天记录搜索
 - [ ] 用户修改密码

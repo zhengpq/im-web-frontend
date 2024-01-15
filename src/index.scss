@@ -76,6 +76,89 @@ code {
   box-sizing: border-box;
 }
 
+.home-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 48px;
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease-in;
+  color: white;
+
+  &:hover {
+    transform: scale(1.05);
+    .home-button-bg {
+      opacity: 0.35;
+    }
+
+    .home-button-text {
+      opacity: 1;
+    }
+  }
+}
+
+.home-button-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0.2;
+  transition: all 0.2s ease-in;
+  z-index: 10;
+}
+
+.home-button-text {
+  position: relative;
+  z-index: 20;
+  opacity: 0.8;
+  transition: all 0.2s ease-in;
+}
+
+.shape-rectangle {
+  animation: rectangleAnimation 12s ease-in-out infinite forwards;
+  transform: translate(0%, -2%) scale(1);
+}
+
+@keyframes rectangleAnimation {
+  0% {
+    transform: translate(0%, -2%) scale(1);
+  }
+
+  50% {
+    transform: translate(2%, -10%) scale(1.05);
+  }
+
+  100% {
+    transform: translate(0%, -2%) scale(1);
+  }
+}
+
+.shape-circle {
+  animation: circleAnimation 12s ease-in-out infinite forwards;
+  transform: translate(-1%, 2%) scale(1);
+}
+
+@keyframes circleAnimation {
+  0% {
+    transform: translate(-1%, 2%) scale(1);
+  }
+
+  50% {
+    transform: translate(-4%, 12%) scale(1.05);
+  }
+
+  100% {
+    transform: (-1%, 2%) scale(1);
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
