@@ -14,7 +14,7 @@
 
 首页注册和登录
 
-![首页](https://im-web-1323590293.cos.ap-guangzhou.myqcloud.com/%E9%A6%96%E9%A1%B5.jpg)
+![首页](https://im-web-1323590293.cos.ap-guangzhou.myqcloud.com/%E9%A6%96%E9%A1%B5.png)
 
 注册完账号之后通过搜索用户添加好友
 
