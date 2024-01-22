@@ -8,8 +8,9 @@ import { ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import ErrorBoundary from './components/error-boundary';
+import ErrorBoundary from './components/error-boundary';
 import { store } from './redux/store';
+import AppError from './components/app-error';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
@@ -23,7 +24,9 @@ root.render(
       <Provider store={store}>
         <StyleProvider hashPriority="high">
           <ConfigProvider locale={zhCN}>
-            <App />
+            <ErrorBoundary fallback={<AppError></AppError>}>
+              <App />
+            </ErrorBoundary>
           </ConfigProvider>
         </StyleProvider>
       </Provider>

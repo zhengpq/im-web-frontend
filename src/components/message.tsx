@@ -30,7 +30,7 @@ const Message: React.FC<MessageProps> = ({
 }) => {
   const dispatch = useDispatch();
   const { sendMessage } = useSendMessage();
-  const { currentChat, chatList } = useSelector((state: RootState) => state.chatPanel.value);
+  const { currentChat } = useSelector((state: RootState) => state.chatPanel.value);
   const [isStateVisible, setIsStateVisible] = useState(false);
   const { content, type, state, ack_id } = message;
   const indexdb = getIndexdb();
@@ -102,7 +102,11 @@ const Message: React.FC<MessageProps> = ({
   let messageContent = null;
   if (type === MessageType.TEXT) {
     messageContent = (
-      <p className="bg-primary rounded-8 p-12 whitespace-pre-wrap text-sm text-white">{content}</p>
+      <p
+        className={`rounded-8 p-12 whitespace-pre-wrap text-sm ${avatarPoi === MessageAvatarPoi.LEFT ? 'bg-white text-tp-gray-900' : 'text-white bg-primary'}`}
+      >
+        {content}
+      </p>
     );
   }
   if (type === MessageType.IMAGE) {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
   return (
-    <div className="flex items-center justify-center w-screen h-screen">
+    <div className="flex items-center justify-center w-screen h-screen overflow-hidden relative">
       <div
         className="absolute z-30"
         style={{
@@ -19,7 +19,7 @@ const Home: React.FC = () => {
           style={{
             width: '100%',
             height: '100%',
-            backgroundColor: 'rgba(255, 255, 255, 0.04)',
+            backgroundColor: 'rgba(2, 0, 0, 0.04)',
             border: '2px solid rgba(255, 255, 255, 0.1)',
             borderRadius: '180px',
           }}
