@@ -1,5 +1,5 @@
 import { Dropdown, Input } from 'antd';
-import React, { type SyntheticEvent, useCallback, useState } from 'react';
+import React, { type SyntheticEvent, useCallback, useState, useEffect } from 'react';
 import debounce from 'lodash/debounce';
 import { useSelector } from 'react-redux';
 import { MagnifyingGlass, User as UserIcon } from 'phosphor-react';
@@ -40,25 +40,38 @@ const FriendsSearch: React.FC<FriendsBookSearchProps> = ({ className }) => {
       async (event: SyntheticEvent<HTMLInputElement>) => {
         const keyword = event.currentTarget.value;
         setInputValue(keyword);
-        if (!keyword) return;
-        const { data } = await request<User[]>({
-          url: `/users/search/${keyword}`,
-          method: 'get',
-          params: {
-            user_id: userId,
-          },
-        });
-        if (data !== null) {
-          setSearchResult(data);
-        } else {
-          setSearchResult([]);
-        }
       },
       200,
       { leading: true, trailing: true },
     ),
     [userId],
   );
+
+  useEffect(() => {
+    let flag = true;
+    if (!inputValue) return;
+    request<User[]>({
+      url: `/users/search/${inputValue}`,
+      method: 'get',
+      params: {
+        user_id: userId,
+      },
+    })
+      .then(({ data }) => {
+        if (!flag) return;
+        if (data !== null) {
+          setSearchResult(data);
+        } else {
+          setSearchResult([]);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    return () => {
+      flag = false;
+    };
+  }, [inputValue]);
 
   return (
     <div className={className}>
