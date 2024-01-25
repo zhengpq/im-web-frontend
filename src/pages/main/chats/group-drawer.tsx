@@ -6,8 +6,6 @@ import GroupMembers from '../friends/group-members';
 import { GroupMember, GroupMemberRoleType } from '@/types/group';
 import { getIndexdb } from '@/common/indexdb';
 import { initMessageList, updateChat } from '@/redux/reducer/chat-panel';
-import socket from '@/socket';
-import { SOCKET_EVENT_DISBAND_GROUP, SOCKET_EVENT_QUIT_GROUP } from '@/const/socket-event';
 import useDisbandGroup from '@/hooks/use-disband-group';
 import useQuitGroup from '@/hooks/use-quit-group';
 

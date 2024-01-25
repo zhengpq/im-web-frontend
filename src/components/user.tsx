@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Popover } from 'antd';
 import { type RootState } from '../redux/store';
 import Avatar from './avatar';
 

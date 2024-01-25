@@ -1,4 +1,3 @@
-// import { MessageType } from 'antd/es/message/interface';
 import { MessageState, MessageType } from '.';
 import { ChatType } from './chat-panel';
 import { FriendRequestRow, FriendRow } from './friend';

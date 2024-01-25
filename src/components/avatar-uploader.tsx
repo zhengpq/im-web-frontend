@@ -1,4 +1,4 @@
-import { Form, type FormInstance, Upload, type UploadProps, message } from 'antd';
+import { Form, type FormInstance, Upload, type UploadProps } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import { PlusOutlined } from '@ant-design/icons';
 import React from 'react';
