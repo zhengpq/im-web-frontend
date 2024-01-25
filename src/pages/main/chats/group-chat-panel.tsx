@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { DotsThree } from 'phosphor-react';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 import { type RootState } from '@/redux/store';
 import Editor from './editor';
 import GroupMessagesList from './group-message-list';

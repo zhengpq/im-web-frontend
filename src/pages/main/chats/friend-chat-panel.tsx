@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { isEqual } from 'lodash';
+import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { FRIEND_SEND_MESSAGE_DISABLED_MESSAGE } from '@/const/message';
 import FriendMessagesList from './friend-messages-list';
 import Editor from './editor';
 import { getIndexdb } from '@/common/indexdb';
-import request from '@/common/request';
-import { FriendRow } from '@/types/friend';
-import { initCurrentChat, updateChat } from '@/redux/reducer/chat-panel';
 import useFriendDiff from '@/hooks/use-friend-diff';
 
 const FriendChatPanel: React.FC = () => {

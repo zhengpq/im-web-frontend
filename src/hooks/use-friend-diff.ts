@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 import request from '@/common/request';
 import { FriendRow } from '@/types/friend';
 import { getIndexdb } from '@/common/indexdb';

@@ -54,6 +54,14 @@ const Home: React.FC = () => {
           </div>
         </Link>
       </div>
+      <div className="flex items-center justify-center absolute bottom-20 text-xs text-white opacity-20">
+        {/* <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">
+          您的备案号
+        </a> */}
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">
+          粤ICP备2024173910号
+        </a>
+      </div>
     </div>
   );
 };

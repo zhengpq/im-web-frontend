@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Popover } from 'antd';
-import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { Smiley } from 'phosphor-react';
 
@@ -19,13 +18,24 @@ interface EmojiProps {
 }
 
 const Emoji: React.FC<EmojiProps> = ({ disabled, onSelect }) => {
+  const [nativeData, setNativeData] = useState(null);
   const handleEmojiSelect = (value: EmojiData) => {
     if (onSelect) {
       const { native } = value;
-      console.log('paki emoji', value);
       onSelect(native);
     }
   };
+  useEffect(() => {
+    fetch('https://cdn.jsdelivr.net/npm/@emoji-mart/data')
+      .then(async (value) => {
+        const data = await value.json();
+        setNativeData(data);
+      })
+      .catch((error) => {
+        console.log('加载表情包数据失败');
+        console.error(error);
+      });
+  }, []);
   return (
     <div>
       <Popover
@@ -33,7 +43,7 @@ const Emoji: React.FC<EmojiProps> = ({ disabled, onSelect }) => {
         placement="top"
         content={
           <Picker
-            data={data}
+            data={nativeData}
             locale="zh"
             previewPosition="none"
             onEmojiSelect={handleEmojiSelect}
@@ -42,7 +52,7 @@ const Emoji: React.FC<EmojiProps> = ({ disabled, onSelect }) => {
       >
         <Button
           type="text"
-          disabled={disabled}
+          disabled={disabled || !nativeData}
           style={{
             display: 'flex',
             alignItems: 'center',
