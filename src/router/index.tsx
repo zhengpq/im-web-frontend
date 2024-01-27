@@ -21,10 +21,10 @@ const redirectLoader = async () => {
   }
 };
 
-const Main = lazy(() => import('@/pages/main'));
-const ChatIndex = lazy(() => import('@/pages/main/chats'));
-const FriendsBook = lazy(() => import('@/pages/main/friends'));
-const SettingIndex = lazy(() => import('@/pages/main/setting'));
+const Main = lazy(() => import(/* webpackPrefetch: true */ '@/pages/main'));
+const ChatIndex = lazy(() => import(/* webpackPrefetch: true */ '@/pages/main/chats'));
+const FriendsBook = lazy(() => import(/* webpackPrefetch: true */ '@/pages/main/friends'));
+const SettingIndex = lazy(() => import(/* webpackPrefetch: true */ '@/pages/main/setting'));
 
 export const router: RouteObject[] = [
   {
