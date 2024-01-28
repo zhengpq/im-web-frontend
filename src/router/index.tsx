@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { type RouteObject, createBrowserRouter, redirect } from 'react-router-dom';
-import SignUp from '../pages/sign-up/index';
-import SignIn from '../pages/sign-in/index';
+// import SignUp from '../pages/sign-up/index';
+// import SignIn from '../pages/sign-in/index';
 import Home from '../pages/home';
 import request from '../common/request';
 import ChatSkeleton from '@/components/chat-skeleton';
@@ -25,6 +25,8 @@ const Main = lazy(() => import(/* webpackPrefetch: true */ '@/pages/main'));
 const ChatIndex = lazy(() => import(/* webpackPrefetch: true */ '@/pages/main/chats'));
 const FriendsBook = lazy(() => import(/* webpackPrefetch: true */ '@/pages/main/friends'));
 const SettingIndex = lazy(() => import(/* webpackPrefetch: true */ '@/pages/main/setting'));
+const SignUp = lazy(() => import(/* webpackPrefetch: true */ '@/pages/sign-up'));
+const SignIn = lazy(() => import(/* webpackPrefetch: true */ '@/pages/sign-in'));
 
 export const router: RouteObject[] = [
   {
@@ -69,13 +71,21 @@ export const router: RouteObject[] = [
   },
   {
     path: '/sign-up',
-    element: <SignUp></SignUp>,
+    element: (
+      <Suspense fallback={<div></div>}>
+        <SignUp></SignUp>
+      </Suspense>
+    ),
     loader: redirectLoader,
     children: [{}],
   },
   {
     path: '/sign-in',
-    element: <SignIn></SignIn>,
+    element: (
+      <Suspense fallback={<div></div>}>
+        <SignIn></SignIn>
+      </Suspense>
+    ),
     loader: redirectLoader,
     children: [{}],
   },
