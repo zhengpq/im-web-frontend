@@ -28,23 +28,14 @@ export const friendsSlice = createSlice({
       }
     },
     updateFriend(state, action: PayloadAction<IndexdbFriendsRow>) {
-      // const { id } = action.payload;
-      // const index = state.value.findIndex((item) => item.id === id);
-      // if (index !== -1) {
-      //   state.value[index] = action.payload;
-      // }
       friendAdapter.updateOne(state, {
         id: action.payload.id,
         changes: action.payload,
       });
     },
-    deleteFriend(state, action: PayloadAction<string>) {
-      // state.value = state.value.filter((item) => item.id !== action.payload);
-      // friendAdapter.removeOne(state, action.payload)
-    },
+    deleteFriend(state, action: PayloadAction<string>) {},
     deleteFriendByFriendId(state, action: PayloadAction<string>) {
       friendAdapter.removeOne(state, action.payload);
-      // state.value = state.value.filter((item) => item.friend_id !== action.payload);
     },
   },
 });

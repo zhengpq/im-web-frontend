@@ -29,12 +29,6 @@ export const chatListSlice = createSlice({
         changes: action.payload,
       });
     },
-    // updateChatLastMessage(
-    //   state,
-    //   action: PayloadAction<{ index: number; lastMessage: FriendMessageRow | GroupMessageRow }>,
-    // ) {
-
-    // },
   },
 });
 

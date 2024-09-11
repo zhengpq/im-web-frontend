@@ -1,5 +1,6 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { User } from '@/types/user';
+import { type RootState } from '../store';
 
 interface ProfileState {
   value: User;
@@ -29,6 +30,10 @@ export const profileSlice = createSlice({
     },
   },
 });
+
+export const profileIdSelector = (state: RootState) => {
+  return state.profile.value.id;
+};
 
 export const { initProfile, clearProfilestate } = profileSlice.actions;
 
