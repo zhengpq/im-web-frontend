@@ -1,8 +1,8 @@
+import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { MessageState } from '@/types';
 import { FriendMessageRow } from '@/types/friend';
 import { GroupMessageRow } from '@/types/group';
 import { IndexdbFriendMessagesRow, IndexdbGroupMessagesRow } from '@/types/indexdb';
-import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { type RootState } from '../store';
 
 const messageListAdapter = createEntityAdapter<IndexdbFriendMessagesRow | IndexdbGroupMessagesRow>({
