@@ -1,10 +1,10 @@
-import { initChatList } from '@/redux/reducer/chat-panel';
 import { initFriendRequests } from '@/redux/reducer/friend-request';
 import { initFriends } from '@/redux/reducer/friends';
 import { initGroups } from '@/redux/reducer/groups';
 import { store } from '@/redux/store';
 import { FriendDeleted, FriendRequestStatus } from '@/types/friend';
 import { DexieClass } from '@/common/indexdb';
+import { initChatList } from '@/redux/reducer/chat-list';
 
 const initFriendRequestsData = async (indexdb: DexieClass) => {
   const { id } = store.getState().profile.value;

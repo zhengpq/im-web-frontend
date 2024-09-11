@@ -1,45 +1,47 @@
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import { type GroupRow } from '@/types/group';
+import { type RootState } from '../store';
 
-interface GroupsState {
-  value: GroupRow[];
-}
-
-export const initialGroupsState: GroupsState = {
-  value: [],
-};
+export const groupAdapter = createEntityAdapter<GroupRow>({
+  sortComparer: (a, b) => a.created_at - b.created_at,
+});
 
 export const groupsSlice = createSlice({
   name: 'groups',
-  initialState: initialGroupsState,
+  initialState: groupAdapter.getInitialState(),
   reducers: {
     clearGroupsState(state) {
-      state.value = initialGroupsState.value;
+      groupAdapter.removeAll(state);
     },
     initGroups(state, action: PayloadAction<GroupRow[]>) {
-      state.value = action.payload;
+      groupAdapter.setAll(state, action.payload);
     },
     addGroup(state, action: PayloadAction<GroupRow | GroupRow[]>) {
       if (Array.isArray(action.payload)) {
-        state.value.unshift(...action.payload);
+        groupAdapter.addMany(state, action.payload);
       } else {
-        state.value.unshift(action.payload);
+        groupAdapter.addOne(state, action.payload);
       }
     },
     deleteGroup(state, action: PayloadAction<string>) {
-      const index = state.value.findIndex((item) => item.id === action.payload);
-      if (index !== -1) {
-        state.value.splice(index, 1);
-      }
+      groupAdapter.removeOne(state, action.payload);
     },
     updateGroup(state, action: PayloadAction<GroupRow>) {
-      const index = state.value.findIndex((item) => item.id === action.payload.id);
-      if (index !== -1) {
-        state.value[index] = action.payload;
-      }
+      groupAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: action.payload,
+      });
     },
   },
 });
+
+export const {
+  selectById: selectGroupById,
+  selectAll: selectAllGroups,
+  selectEntities: selectGroupEntities,
+  selectIds: selectFriendsIds,
+  selectTotal: selectFriendsTotal,
+} = groupAdapter.getSelectors((state: RootState) => state.groups);
 
 export const { initGroups, clearGroupsState, addGroup, deleteGroup, updateGroup } =
   groupsSlice.actions;

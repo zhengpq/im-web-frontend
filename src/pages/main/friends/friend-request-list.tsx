@@ -4,13 +4,14 @@ import { Receipt } from 'phosphor-react';
 import { List } from 'antd';
 import { RootState } from '@/redux/store';
 import FriendRequest from './friend-request';
+import { selectAllFriendRequests } from '@/redux/reducer/friend-request';
 
 interface FriendRequestListProps {
   className?: string;
 }
 
 const FriendRequestList: React.FC<FriendRequestListProps> = ({ className }) => {
-  const friendRequests = useSelector((state: RootState) => state.friendRequest.value);
+  const friendRequests = useSelector(selectAllFriendRequests);
   let content = null;
   if (friendRequests.length === 0) {
     content = (

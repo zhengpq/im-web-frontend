@@ -1,9 +1,11 @@
 import { FriendMessageRow } from '@/types/friend';
 import { getIndexdb } from './indexdb';
 import { store } from '@/redux/store';
-import { addChat, addMessage, updateChat } from '@/redux/reducer/chat-panel';
+import { updateCurrentChat } from '@/redux/reducer/chat-panel';
 import { ChatType } from '@/types/chat-panel';
 import { IndexdbChatsRow } from '@/types/indexdb';
+import { addChat, updateChat } from '@/redux/reducer/chat-list';
+import { addMessage } from '@/redux/reducer/message-list';
 
 /**
  * 对获取到的新消息的处理：
@@ -38,6 +40,7 @@ const handleNewFriendMessages = async (
     chat.last_message = lastMessage;
     await indexdb?.chats.update(chat.id, chat);
     store.dispatch(updateChat(chat));
+    store.dispatch(updateCurrentChat(chat));
     if (callback) {
       callback(chat);
     }

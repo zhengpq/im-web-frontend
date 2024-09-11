@@ -2,18 +2,16 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { List } from 'antd';
 import Chat from './chat';
-import { type RootState } from '@/redux/store';
+import { selectAllChats } from '@/redux/reducer/chat-list';
 
 const ChatList: React.FC = () => {
-  const chatList = useSelector((state: RootState) => state.chatPanel.value.chatList);
-  const chatFinal = [...chatList];
-  chatFinal.sort((a, b) => b.active_time - a.active_time);
+  const chatList = useSelector(selectAllChats);
 
   return (
     <div>
       <List
         split={false}
-        dataSource={chatFinal}
+        dataSource={chatList}
         renderItem={(item) => {
           return (
             <List.Item style={{ padding: 0 }}>

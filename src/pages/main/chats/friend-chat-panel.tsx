@@ -6,6 +6,7 @@ import FriendMessagesList from './friend-messages-list';
 import Editor from './editor';
 import { getIndexdb } from '@/common/indexdb';
 import useFriendDiff from '@/hooks/use-friend-diff';
+import { selectAllFriends } from '@/redux/reducer/friends';
 
 const FriendChatPanel: React.FC = () => {
   const { friendDiff } = useFriendDiff();
@@ -13,7 +14,7 @@ const FriendChatPanel: React.FC = () => {
   const [disabledMessage, setDisabledMessage] = useState('');
   const { currentChat } = useSelector((state: RootState) => state.chatPanel.value);
   const profile = useSelector((state: RootState) => state.profile.value);
-  const friends = useSelector((state: RootState) => state.friends.value);
+  const friends = useSelector(selectAllFriends);
   const indexdb = getIndexdb();
   if (!currentChat) {
     return null;

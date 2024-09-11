@@ -10,6 +10,7 @@ import useStartChat from '@/hooks/use-start-chat';
 import { ChatType } from '@/types/chat-panel';
 import useFriendDiff from '@/hooks/use-friend-diff';
 import { getIndexdb } from '@/common/indexdb';
+import { selectAllFriends } from '@/redux/reducer/friends';
 
 interface FriendDetailProps {
   id: string;
@@ -23,7 +24,7 @@ const commonButonStyle: React.CSSProperties = {
 };
 
 const FriendDetail: React.FC<FriendDetailProps> = ({ id }) => {
-  const friends = useSelector((state: RootState) => state.friends.value);
+  const friends = useSelector(selectAllFriends);
   const profile = useSelector((state: RootState) => state.profile.value);
   const { startChat } = useStartChat();
   const { friendDiff } = useFriendDiff();

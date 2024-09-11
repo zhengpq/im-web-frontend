@@ -3,8 +3,9 @@ import isEqual from 'lodash/isEqual';
 import request from '@/common/request';
 import { FriendRow } from '@/types/friend';
 import { getIndexdb } from '@/common/indexdb';
-import { initCurrentChat, updateChat } from '@/redux/reducer/chat-panel';
+import { initCurrentChat, updateCurrentChat } from '@/redux/reducer/chat-panel';
 import { updateFriend } from '@/redux/reducer/friends';
+import { updateChat } from '@/redux/reducer/chat-list';
 
 const useFriendDiff = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const useFriendDiff = () => {
           chatCopy.users = [data];
           await indexdb.chats.update(friendId, chatCopy);
           dispatch(updateChat(chatCopy));
+          dispatch(updateCurrentChat(chatCopy));
           dispatch(initCurrentChat(chatCopy));
         });
       }

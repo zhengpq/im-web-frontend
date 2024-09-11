@@ -1,3 +1,4 @@
+import { clearChatList } from '@/redux/reducer/chat-list';
 import { clearChatPanelState } from '@/redux/reducer/chat-panel';
 import { clearFriendRequestState } from '@/redux/reducer/friend-request';
 import { clearFriendsState } from '@/redux/reducer/friends';
@@ -12,6 +13,7 @@ const useLogOut = () => {
     socket.disconnect();
     // 初始化 redux 数据
     store.dispatch(clearChatPanelState());
+    store.dispatch(clearChatList());
     store.dispatch(clearFriendRequestState());
     store.dispatch(clearFriendsState());
     store.dispatch(clearGroupsState());

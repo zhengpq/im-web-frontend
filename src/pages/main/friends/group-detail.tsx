@@ -9,6 +9,7 @@ import useStartChat from '@/hooks/use-start-chat';
 import { ChatType } from '@/types/chat-panel';
 import useDisbandGroup from '@/hooks/use-disband-group';
 import useQuitGroup from '@/hooks/use-quit-group';
+import { selectAllGroups } from '@/redux/reducer/groups';
 
 interface GroupDetailProps {
   id: string;
@@ -22,7 +23,7 @@ const commonButonStyle: React.CSSProperties = {
 };
 
 const GroupDetail: React.FC<GroupDetailProps> = ({ id }) => {
-  const groups = useSelector((state: RootState) => state.groups.value);
+  const groups = useSelector(selectAllGroups);
   const profile = useSelector((state: RootState) => state.profile.value);
   const { startChat } = useStartChat();
   const { disbandGroup } = useDisbandGroup();

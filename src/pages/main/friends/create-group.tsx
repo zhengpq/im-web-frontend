@@ -11,6 +11,7 @@ import Avatar from '@/components/avatar';
 import { type FriendRow } from '@/types/friend';
 import { GROUP_HELLO_MESSAGE } from '@/const/message';
 import { minGroupMembersCount } from '@/const/group';
+import { selectAllFriends } from '@/redux/reducer/friends';
 
 type FieldType = {
   groupName: string;
@@ -27,7 +28,7 @@ const CreateGroup = () => {
   const [chosenFriends, setChosenFriends] = useState<FriendRow[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [formValue, setFormValue] = useState(formInitialValues);
-  const friends = useSelector((state: RootState) => state.friends.value);
+  const friends = useSelector(selectAllFriends);
   const profile = useSelector((state: RootState) => state.profile);
   const [form] = Form.useForm();
 

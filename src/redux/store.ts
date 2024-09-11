@@ -4,6 +4,8 @@ import friendRequestReducer from './reducer/friend-request';
 import friendsReducer from './reducer/friends';
 import chatPanelReducer from './reducer/chat-panel';
 import groupsReducer from './reducer/groups';
+import chatListReducer from './reducer/chat-list';
+import messageListReducer from './reducer/message-list';
 import socketReducer from './reducer/socket';
 
 export const store = configureStore({
@@ -13,6 +15,8 @@ export const store = configureStore({
     friendRequest: friendRequestReducer,
     friends: friendsReducer,
     chatPanel: chatPanelReducer,
+    chatList: chatListReducer,
+    messageList: messageListReducer,
     groups: groupsReducer,
   },
 });

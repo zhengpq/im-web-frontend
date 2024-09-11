@@ -9,6 +9,8 @@ import { RootState } from '@/redux/store';
 import { FriendRequestStatus } from '@/types/friend';
 import { MenusKey } from '@/types/menus';
 import BadgeWrap from '@/components/badge-wrap';
+import { selectAllFriendRequests } from '@/redux/reducer/friend-request';
+import { selectAllChats } from '@/redux/reducer/chat-list';
 
 interface SidebarProps {
   className?: string;
@@ -16,8 +18,8 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ className }) => {
   const { pathname } = useLocation();
-  const friendRequests = useSelector((state: RootState) => state.friendRequest.value);
-  const { chatList } = useSelector((state: RootState) => state.chatPanel.value);
+  const friendRequests = useSelector(selectAllFriendRequests);
+  const chatList = useSelector(selectAllChats);
   const commonStyle: React.CSSProperties = useMemo(() => {
     return {
       display: 'flex',

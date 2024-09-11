@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Divider, List } from 'antd';
 import FriendsSearch from './friends-search';
 import Friend from './friend';
-import { type RootState } from '@/redux/store';
 import ListCard from '@/components/list-card';
 import BadgeWrap from '@/components/badge-wrap';
 import CreateGroup from './create-group';
@@ -14,13 +13,16 @@ import { ChatType } from '@/types/chat-panel';
 import FriendDetail from './friend-detail';
 import GroupDetail from './group-detail';
 import EmptyChat from '@/components/empty-chat';
+import { selectAllFriends } from '@/redux/reducer/friends';
+import { selectAllGroups } from '@/redux/reducer/groups';
+import { selectAllFriendRequests } from '@/redux/reducer/friend-request';
 
 const FRIEND_REQUESTS_ID = 'friend-requests';
 
 const FriendsBook: React.FC = () => {
-  const friendRequests = useSelector((state: RootState) => state.friendRequest.value);
-  const friends = useSelector((state: RootState) => state.friends.value);
-  const groups = useSelector((state: RootState) => state.groups.value);
+  const friendRequests = useSelector(selectAllFriendRequests);
+  const friends = useSelector(selectAllFriends);
+  const groups = useSelector(selectAllGroups);
 
   const [currentFriend, setCurrentFriend] = useState('');
   const [currentFriendType, setCurrentFriendType] = useState<ChatType | null>(null);

@@ -8,6 +8,7 @@ import Avatar from '@/components/avatar';
 import { GroupRow } from '@/types/group';
 import socket from '@/socket';
 import { SOCKET_EVENT_ADD_GROUP_MEMBERS } from '@/const/socket-event';
+import { selectAllFriends } from '@/redux/reducer/friends';
 
 interface AddGroupMembersProps {
   group: GroupRow;
@@ -24,7 +25,7 @@ const AddGroupMembers: React.FC<AddGroupMembersProps> = ({
 }) => {
   const [chosenFriends, setChosenFriends] = useState<FriendRow[]>([]);
   const profile = useSelector((state: RootState) => state.profile.value);
-  const friends = useSelector((state: RootState) => state.friends.value);
+  const friends = useSelector(selectAllFriends);
   const handleCancel = () => {
     if (onCancel) {
       onCancel();

@@ -3,10 +3,11 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ChatType } from '@/types/chat-panel';
 import { getIndexdb } from '@/common/indexdb';
-import { addChat, initCurrentChat, updateChat } from '@/redux/reducer/chat-panel';
+import { initCurrentChat, updateCurrentChat } from '@/redux/reducer/chat-panel';
 import { IndexdbChatsRow } from '@/types/indexdb';
 import { GroupMember } from '@/types/group';
 import { FriendRow } from '@/types/friend';
+import { addChat, updateChat } from '@/redux/reducer/chat-list';
 
 const useStartChat = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const useStartChat = () => {
       chat.active_time = Date.now();
       await indexdb?.chats.update(chat.id, chat);
       dispatch(updateChat(chat));
+      dispatch(updateCurrentChat(chat));
       dispatch(initCurrentChat(chat));
     } else {
       const createdTime = Date.now();

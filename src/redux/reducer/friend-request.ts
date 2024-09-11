@@ -1,48 +1,48 @@
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import { type FriendRequestData, type FriendRequestStatus } from '../../types/friend';
 import { friendRequestSort } from '../../common/friend';
+import { type RootState } from '../store';
 
-interface FriendRequestsState {
-  value: FriendRequestData[];
-}
-
-export const initialRequestsState: FriendRequestsState = {
-  value: [],
-};
+export const friendRequestsAdapter = createEntityAdapter<FriendRequestData>({
+  sortComparer: (a, b) => {
+    if (!a?.created_at || !b?.created_at) return 0;
+    return a.created_at - b.created_at;
+  },
+});
 
 export const friendRequestsSlice = createSlice({
   name: 'friendRequest',
-  initialState: initialRequestsState,
+  initialState: friendRequestsAdapter.getInitialState(),
   reducers: {
     clearFriendRequestState(state) {
-      state.value = initialRequestsState.value;
+      friendRequestsAdapter.removeAll(state);
     },
     initFriendRequests(state, action: PayloadAction<FriendRequestData[]>) {
-      state.value = friendRequestSort(action.payload);
+      friendRequestsAdapter.setAll(state, action.payload);
     },
     addFriendRequest(state, action: PayloadAction<FriendRequestData | FriendRequestData[]>) {
       if (Array.isArray(action.payload)) {
-        state.value.unshift(...action.payload);
+        friendRequestsAdapter.addMany(state, action.payload);
       } else {
-        state.value.unshift(action.payload);
+        friendRequestsAdapter.addOne(state, action.payload);
       }
     },
     deleteFriendRequest(state, action: PayloadAction<string>) {
-      state.value = state.value.filter((item) => item?.id !== action.payload);
+      friendRequestsAdapter.removeOne(state, action.payload);
     },
     deleteFriendRequestBySenderId(state, action: PayloadAction<string>) {
-      state.value = state.value.filter((item) => item?.sender_id !== action.payload);
+      friendRequestsAdapter.removeOne(state, action.payload);
     },
     updateFriendRequestState(
       state,
       action: PayloadAction<{ id: string; status: FriendRequestStatus }>,
     ) {
-      state.value.forEach((item) => {
-        if (item?.id === action.payload.id) {
-          item.status = action.payload.status;
-        }
+      friendRequestsAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: {
+          status: action.payload.status,
+        },
       });
-      state.value = friendRequestSort(state.value);
     },
   },
 });
@@ -55,5 +55,13 @@ export const {
   updateFriendRequestState,
   clearFriendRequestState,
 } = friendRequestsSlice.actions;
+
+export const {
+  selectAll: selectAllFriendRequests,
+  selectById: selectFriendRequestById,
+  selectEntities: selectFriendRequestsEntities,
+  selectIds: selectFriendRequestsIds,
+  selectTotal: selectTotalFriendRequests,
+} = friendRequestsAdapter.getSelectors((state: RootState) => state.friendRequest);
 
 export default friendRequestsSlice.reducer;

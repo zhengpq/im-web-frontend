@@ -3,20 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IndexdbChatsRow } from '@/types/indexdb';
 import { getIndexdb } from '@/common/indexdb';
 import { RootState } from '@/redux/store';
-import {
-  initCurrentChat,
-  initMessageList,
-  updateChat,
-  updateSwitching,
-} from '@/redux/reducer/chat-panel';
+import { initCurrentChat, updateCurrentChat, updateSwitching } from '@/redux/reducer/chat-panel';
 import ChatCard from './chat-card';
 import { messageFormat } from '@/common/friend-message';
 import { getDateHourAndMinute } from '@/utils/common';
+import { selectAllChats, updateChat } from '@/redux/reducer/chat-list';
+import { initMessageList } from '@/redux/reducer/message-list';
 
 const Chat: React.FC<IndexdbChatsRow> = ({ id, name, type, unread_count, users, last_message }) => {
   const indexdb = getIndexdb();
   const dispatch = useDispatch();
-  const chatList = useSelector((state: RootState) => state.chatPanel.value.chatList);
+  const chatList = useSelector(selectAllChats);
   const currentChat = useSelector((state: RootState) => state.chatPanel.value.currentChat);
   const handleClick = async () => {
     dispatch(updateSwitching(true));
@@ -30,6 +27,7 @@ const Chat: React.FC<IndexdbChatsRow> = ({ id, name, type, unread_count, users, 
         chatCopy.unread_count = 0;
         await indexdb?.chats.update(chatCopy.id, chatCopy);
         dispatch(updateChat(chatCopy));
+        dispatch(updateCurrentChat(chatCopy));
       }
     }
   };

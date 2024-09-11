@@ -13,8 +13,10 @@ import { GroupMember, GroupMemberRoleType } from '@/types/group';
 import socket from '@/socket';
 import { SOCKET_EVENT_UPDATE_GROUP_NAME } from '@/const/socket-event';
 import { getIndexdb } from '@/common/indexdb';
-import { initCurrentChat, updateChat } from '@/redux/reducer/chat-panel';
+import { initCurrentChat, updateCurrentChat } from '@/redux/reducer/chat-panel';
 import request from '@/common/request';
+import { selectAllGroups } from '@/redux/reducer/groups';
+import { updateChat } from '@/redux/reducer/chat-list';
 
 const GroupChatPanel: React.FC = () => {
   const [disabled, setDisabled] = useState(false);
@@ -22,7 +24,7 @@ const GroupChatPanel: React.FC = () => {
   const dispatch = useDispatch();
   const profile = useSelector((state: RootState) => state.profile.value);
   const currentChat = useSelector((state: RootState) => state.chatPanel.value.currentChat);
-  const groups = useSelector((state: RootState) => state.groups.value);
+  const groups = useSelector(selectAllGroups);
   const indexdb = getIndexdb();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   if (!currentChat) {
@@ -86,6 +88,7 @@ const GroupChatPanel: React.FC = () => {
       if (!isEqual(chatCopy, chatValue)) {
         await indexdb.chats.update(currentChat.id, chatCopy);
         dispatch(updateChat(chatCopy));
+        dispatch(updateCurrentChat(chatCopy));
         dispatch(initCurrentChat(chatCopy));
       }
     });

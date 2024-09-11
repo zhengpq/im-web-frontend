@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Spin } from 'antd';
 import { type RootState } from '@/redux/store';
-import { initMessageList } from '@/redux/reducer/chat-panel';
 import { MessageAvatarPoi } from '@/types';
 import { IndexdbGroupMessagesRow } from '@/types/indexdb';
 import UpdateMessage from '@/components/update-message';
@@ -11,14 +10,16 @@ import GroupMessage from './group-message';
 import useMessageListScroll from '@/hooks/use-message-list-scroll';
 import useLoadGroupMessages from '@/hooks/use-load-group-messages';
 import useGetContainerHeight from '@/hooks/use-get-container-height';
+import { selectAllChats } from '@/redux/reducer/chat-list';
+import { initMessageList, selectAllMessages } from '@/redux/reducer/message-list';
 
 const GroupMessagesList = () => {
   const [hasMore, setHasMore] = useState(true);
   const dispatch = useDispatch();
   const profile = useSelector((state: RootState) => state.profile.value);
-  const { currentChat, chatList, messageList } = useSelector(
-    (state: RootState) => state.chatPanel.value,
-  );
+  const { currentChat } = useSelector((state: RootState) => state.chatPanel.value);
+  const messageList = useSelector(selectAllMessages);
+  const chatList = useSelector(selectAllChats);
   const { loadMessages } = useLoadGroupMessages();
   const messageListRef = useRef<HTMLDivElement>(null);
   const containerHeight = useGetContainerHeight(messageListRef.current);

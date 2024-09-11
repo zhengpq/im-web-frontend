@@ -32,7 +32,7 @@ import {
 } from '../redux/reducer/friend-request';
 import { addFriend, deleteFriendByFriendId } from '../redux/reducer/friends';
 import { type FriendMessageRow } from '@/types/friend';
-import { ackMessage, addChat, updateChat } from '@/redux/reducer/chat-panel';
+import { updateCurrentChat } from '@/redux/reducer/chat-panel';
 import { MessageState, MessageType } from '@/types';
 import { ChatType } from '@/types/chat-panel';
 import {
@@ -60,6 +60,8 @@ import uuidv4 from '@/utils/uuid';
 import { addGroup, deleteGroup, updateGroup } from '@/redux/reducer/groups';
 import { changeConnectingState } from '@/redux/reducer/socket';
 import { DOMAIN } from '@/const/api';
+import { addChat, updateChat } from '@/redux/reducer/chat-list';
+import { ackMessage } from '@/redux/reducer/message-list';
 
 const socket = io(`${DOMAIN}`, {
   autoConnect: false,
@@ -276,6 +278,7 @@ socket.on(SOCKET_EVENT_SENT_FRIEND_MESSAGE, async (value: SocketValue<FriendMess
       }
       await indexdb?.chats.update(chat.id, chat);
       store.dispatch(updateChat(chat));
+      store.dispatch(updateCurrentChat(chat));
     }
   } else {
     await handleNewFriendMessages(message);
@@ -360,6 +363,7 @@ socket.on(SOCKET_EVENT_SEND_GROUP_MESSAGE, async (value: SocketValue<GroupMessag
       }
       await indexdb?.chats.update(chat.id, chat);
       store.dispatch(updateChat(chat));
+      store.dispatch(updateCurrentChat(chat));
     }
   } else {
     await handleNewGroupMessages(message);

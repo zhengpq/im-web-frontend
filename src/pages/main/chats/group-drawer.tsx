@@ -5,9 +5,12 @@ import { RootState } from '@/redux/store';
 import GroupMembers from '../friends/group-members';
 import { GroupMember, GroupMemberRoleType } from '@/types/group';
 import { getIndexdb } from '@/common/indexdb';
-import { initMessageList, updateChat } from '@/redux/reducer/chat-panel';
+import { updateCurrentChat } from '@/redux/reducer/chat-panel';
 import useDisbandGroup from '@/hooks/use-disband-group';
 import useQuitGroup from '@/hooks/use-quit-group';
+import { selectAllGroups } from '@/redux/reducer/groups';
+import { updateChat } from '@/redux/reducer/chat-list';
+import { initMessageList } from '@/redux/reducer/message-list';
 
 const { confirm } = Modal;
 
@@ -31,7 +34,7 @@ const GroupDrawer: React.FC<GroupDrawerProps> = ({ open, onClose }) => {
   const dispatch = useDispatch();
   const currentChat = useSelector((state: RootState) => state.chatPanel.value.currentChat);
   const profile = useSelector((state: RootState) => state.profile.value);
-  const groups = useSelector((state: RootState) => state.groups.value);
+  const groups = useSelector(selectAllGroups);
   const { disbandGroup } = useDisbandGroup();
   const { quitGroup } = useQuitGroup();
   const group = groups.find((item) => item.id === currentChat?.id);
@@ -66,6 +69,7 @@ const GroupDrawer: React.FC<GroupDrawerProps> = ({ open, onClose }) => {
             }
             await indexdb.chats.update(chat.id, chat);
             dispatch(updateChat(chat));
+            dispatch(updateCurrentChat(chat));
           }
         }
       },

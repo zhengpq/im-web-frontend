@@ -6,12 +6,12 @@ import { MessageAvatarPoi, MessageState, MessageType } from '@/types';
 import MessageImage from './message-image';
 import Avatar from './avatar';
 import { LOADING_START_TIME, TIME_OUT_START_TIME } from '@/const/message';
-import { changeMessageState } from '@/redux/reducer/chat-panel';
 import { type RootState } from '@/redux/store';
 import { IndexdbFriendMessagesRow, IndexdbGroupMessagesRow } from '@/types/indexdb';
 import { getIndexdb } from '@/common/indexdb';
 import useSendMessage from '@/hooks/use-send-message';
 import uploadImage from '@/common/upload-image';
+import { changeMessageState } from '@/redux/reducer/message-list';
 
 interface MessageProps {
   username?: string;

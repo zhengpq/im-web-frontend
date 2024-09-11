@@ -5,7 +5,9 @@ import { getIndexdb } from '@/common/indexdb';
 import uuidv4 from '@/utils/uuid';
 import { MessageState, MessageType } from '@/types';
 import { ChatType } from '@/types/chat-panel';
-import { addTempMessage, updateChat } from '@/redux/reducer/chat-panel';
+import { updateCurrentChat } from '@/redux/reducer/chat-panel';
+import { updateChat } from '@/redux/reducer/chat-list';
+import { addTempMessage } from '@/redux/reducer/message-list';
 
 const useCreateTempMessage = () => {
   const dispatch = useDispatch();
@@ -51,6 +53,7 @@ const useCreateTempMessage = () => {
     chatCopy.last_message = messageData;
     await indexdb?.chats.update(chat.id, chatCopy);
     dispatch(updateChat(chatCopy));
+    dispatch(updateCurrentChat(chatCopy));
     return result;
   };
 
